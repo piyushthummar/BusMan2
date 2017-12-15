@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">BusMan</string>
+    <array name="stop">
+        <item>singanpor</item>
+        <item>dabholi</item>
+        <item>niru farm</item>
+        <item>amba talavadi</item>
+        <item>gajera school</item>
+        <item>gau-shala</item>
+        <item>mini bazar</item>
+        <item>baroda</item>
+        <item>hirabaug</item>
+        <item>kapodra</item>
+        <item>bamba gate</item>
+        <item>CNG</item>
+        <item>chowpati</item>
+        <item>Nana Varachha</item>
+        <item>simada</item>
+        <item>jakatnaka</item>
+        <item>Navjeevan</item>
+        <item>Shyamdham mandir</item>
+        <item>pasodra</item>
+        <item>kamrej</item>
+    </array>
 </resources>
