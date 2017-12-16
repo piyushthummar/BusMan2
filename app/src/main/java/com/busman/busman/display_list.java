@@ -3,10 +3,15 @@ package com.busman.busman;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,4 +54,25 @@ public class display_list extends AppCompatActivity {
 
     }
 
+    private void updatestudent(String id,String name,String stop,String fee){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogview = inflater.inflate(R.layout.dialogbox,null);
+
+        dialog.setView(dialogview);
+
+        final EditText u_name = (EditText) findViewById(R.id.u_name);
+        //final Spinner u_stop = (Spinner) findViewById(R.id.u_stop);
+        final EditText u_fees = (EditText) findViewById(R.id.u_fees);
+        final Button update = (Button) findViewById(R.id.update);
+
+        u_name.setText(name);
+        //u_stop.
+        u_fees.setText(fee);
+
+
+        dialog.setTitle("Updating student" + id);
+        AlertDialog alertDialog = dialog.create();
+        alertDialog.show();
+    }
 }
