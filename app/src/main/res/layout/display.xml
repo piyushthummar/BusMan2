@@ -7,17 +7,22 @@
         android:id="@+id/d_id"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:textAppearance="@android:style/TextAppearance.Large"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/d_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:text="TextView" />
 
     <TextView
         android:id="@+id/d_fees"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:textAppearance="@android:style/TextAppearance.Large"
         android:text="TextView" />
 </LinearLayout>

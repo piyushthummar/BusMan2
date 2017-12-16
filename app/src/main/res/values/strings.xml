@@ -22,4 +22,5 @@
         <item>pasodra</item>
         <item>kamrej</item>
     </array>
+    <string name="title_activity_display_list">display_list</string>
 </resources>
