@@ -37,11 +37,13 @@ public class display extends ArrayAdapter<student> {
 
             TextView id_no = (TextView) listViewItem.findViewById(R.id.d_id);
             TextView stu_name = (TextView) listViewItem.findViewById(R.id.d_name);
+            TextView stop = (TextView) listViewItem.findViewById(R.id.stop);
             TextView fee = (TextView) listViewItem.findViewById(R.id.d_fees);
 
             student student = students.get(position);
             id_no.setText(student.getId());
             stu_name.setText(student.getName());
+            stop.setText(student.getStop());
             fee.setText(student.getFees());
 
             return listViewItem;

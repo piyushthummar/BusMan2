@@ -6,13 +6,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,17 +54,9 @@ public class display_list extends AppCompatActivity {
             }
         });
 
-        stu_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                student student =  studentList.get(i);
-                updatestudent(student.getId(),student.getName(),student.getStop(),student.getFees());
-                return false;
-            }
-        });
     }
 
-    private void updatestudent(String id,String name,String stop,String fee){
+    private void showupdatedialog(String id,String name,String stop,String fee){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogview = inflater.inflate(R.layout.dialogbox,null);
@@ -83,5 +76,12 @@ public class display_list extends AppCompatActivity {
         dialog.setTitle("Updating student" + id);
         AlertDialog alertDialog = dialog.create();
         alertDialog.show();
+    }
+    public boolean updatestudent(String id,String name,String stop,String fee){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("student").child(id);
+        student student = new student(id,name,stop,fee);
+        databaseReference.setValue(student);
+        Toast.makeText(this, "Student Updated Successfully", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
