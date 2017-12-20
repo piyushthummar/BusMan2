@@ -6,9 +6,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -53,14 +53,6 @@ public class display_list extends AppCompatActivity {
             }
         });
 
-        stu_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                student student =  studentList.get(i);
-                updatestudent(student.getId(),student.getName(),student.getStop(),student.getFees());
-                return false;
-            }
-        });
     }
 
     private void updatestudent(String id,String name,String stop,String fee){
