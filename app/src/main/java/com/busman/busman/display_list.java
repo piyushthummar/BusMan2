@@ -90,7 +90,7 @@ public class display_list extends AppCompatActivity implements Serializable{
         //student student = students.get(position);
        // u_stop.setSelection();
 
-        dialog.setTitle("Updating Student" + id);
+        dialog.setTitle("     Updating Student : " + name);
         final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 

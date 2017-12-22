@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Enter Fees to update"/>
+            android:hint="Enter Fees to update"/>
 
     </LinearLayout>
 
