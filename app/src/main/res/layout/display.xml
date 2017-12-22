@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/d_id"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textAppearance="@android:style/TextAppearance.Large"
-        android:text="TextView" />
 
     <TextView
         android:id="@+id/d_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textAppearance="@android:style/TextAppearance.Large"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:text="TextView" />
+        android:text="NAME :" />
+
+
+    <TextView
+        android:id="@+id/d_id"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:text="ID NO :" />
+
+    <TextView
+        android:id="@+id/d_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:text="PICKUP POINT :" />
 
     <TextView
         android:id="@+id/d_fees"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:textAppearance="@android:style/TextAppearance.Large"
-        android:text="TextView" />
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:text="FEES :" />
 </LinearLayout>

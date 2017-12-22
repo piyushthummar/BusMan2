@@ -7,8 +7,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -54,19 +56,27 @@ public class display_list extends AppCompatActivity {
             }
         });
 
+        stu_list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                student student =  studentList.get(i);
+                showupdatedialog(student.getId(),student.getName(),student.getStop(),student.getFees());
+                return false;
+            }
+        });
     }
 
-    private void showupdatedialog(String id,String name,String stop,String fee){
+    private void showupdatedialog(final String id, String name, final String stop, final String fee){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogview = inflater.inflate(R.layout.dialogbox,null);
 
         dialog.setView(dialogview);
 
-        final EditText u_name = (EditText) findViewById(R.id.u_name);
-        //final Spinner u_stop = (Spinner) findViewById(R.id.u_stop);
-        final EditText u_fees = (EditText) findViewById(R.id.u_fees);
-        final Button update = (Button) findViewById(R.id.update);
+        final EditText u_name = (EditText) dialogview.findViewById(R.id.u_name);
+        final Spinner u_stop = (Spinner) dialogview.findViewById(R.id.u_stop);
+        final EditText u_fees = (EditText) dialogview.findViewById(R.id.u_fees);
+        final Button update = (Button) dialogview.findViewById(R.id.update);
 
         u_name.setText(name);
         //u_stop.
@@ -74,8 +84,22 @@ public class display_list extends AppCompatActivity {
 
 
         dialog.setTitle("Updating student" + id);
-        AlertDialog alertDialog = dialog.create();
+        final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = u_name.getText().toString().trim();
+                String stop = u_stop.getSelectedItem().toString();
+                String fee = u_fees.getText().toString().trim();
+                if (!TextUtils.isEmpty(name)) {
+                    updatestudent(id, name, stop, fee);
+                    alertDialog.dismiss();
+                }
+            }
+        });
+
     }
     public boolean updatestudent(String id,String name,String stop,String fee){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("student").child(id);
