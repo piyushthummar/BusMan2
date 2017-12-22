@@ -23,10 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class display_list extends AppCompatActivity {
+public class display_list extends AppCompatActivity implements Serializable{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +61,15 @@ public class display_list extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 student student =  studentList.get(i);
-                showupdatedialog(i,student.getId(),student.getName(),student.getStop(),student.getFees());
+                Bundle b = new Bundle();
+                b.putSerializable("value", (Serializable) student);
+                showupdatedialog(b,student.getId(),student.getName(),student.getStop(),student.getFees());
                 return true;
             }
         });
     }
 
-    private void showupdatedialog(int i,final String id, String name, final String stop, final String fee){
+    private void showupdatedialog(Bundle b,final String id, String name, final String stop, final String fee){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogview = inflater.inflate(R.layout.dialogbox,null);
@@ -77,12 +80,15 @@ public class display_list extends AppCompatActivity {
         final Spinner u_stop = (Spinner) dialogview.findViewById(R.id.u_stop);
         final EditText u_fees = (EditText) dialogview.findViewById(R.id.u_fees);
         final Button update = (Button) dialogview.findViewById(R.id.update);
-        List<student> students;
+       // List<student> students;
         u_name.setText(name);
         //u_stop.
         u_fees.setText(fee);
+        /*student s = (student) b.getSerializable("value");
+        s.*/
+       // u_stop.setSelection();
         //student student = students.get(position);
-        u_stop.setSelection(i);
+       // u_stop.setSelection();
 
         dialog.setTitle("Updating Student" + id);
         final AlertDialog alertDialog = dialog.create();
