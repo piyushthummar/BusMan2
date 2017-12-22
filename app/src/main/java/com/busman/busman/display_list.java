@@ -1,5 +1,6 @@
 package com.busman.busman;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -41,6 +42,7 @@ public class display_list extends AppCompatActivity implements Serializable{
 
         databaseReference = FirebaseDatabase.getInstance().getReference("students");
         databaseReference.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
@@ -63,13 +65,13 @@ public class display_list extends AppCompatActivity implements Serializable{
                 student student =  studentList.get(i);
                /* Bundle b = new Bundle();
                 b.putSerializable("value", (Serializable) student);*/ //pass b as argument in showupdatedialog function
-                showupdatedialog(student.getId(),student.getName(),student.getStop(),student.getFees());
+                showupdatedeletedialog(student.getId(),student.getName(),student.getStop(),student.getFees());
                 return true;
             }
         });
     }
 
-    private void showupdatedialog(final String id, String name, final String stop, final String fee){
+    private void showupdatedeletedialog(final String id, String name, final String stop, final String fee){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogview = inflater.inflate(R.layout.dialogbox,null);
@@ -80,6 +82,7 @@ public class display_list extends AppCompatActivity implements Serializable{
         final Spinner u_stop = (Spinner) dialogview.findViewById(R.id.u_stop);
         final EditText u_fees = (EditText) dialogview.findViewById(R.id.u_fees);
         final Button update = (Button) dialogview.findViewById(R.id.update);
+        final Button delete = dialogview.findViewById(R.id.delete);
        // List<student> students;
         u_name.setText(name);
         //u_stop.
@@ -104,10 +107,33 @@ public class display_list extends AppCompatActivity implements Serializable{
                     updatestudent(id, name, stop, fee);
                     alertDialog.dismiss();
                 }
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
             }
         });
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletestudent(id);
+                alertDialog.dismiss();
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
     }
+
+    private boolean deletestudent(String id) {
+        DatabaseReference dref = FirebaseDatabase.getInstance().getReference("students").child(id);
+        dref.removeValue();
+        Toast.makeText(this, "Student is deleted", Toast.LENGTH_SHORT).show();
+        return true;
+
+    }
+
     public boolean updatestudent(String id,String name,String stop,String fee){
         DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("students").child(id);
         student student = new student(id,name,stop,fee);
