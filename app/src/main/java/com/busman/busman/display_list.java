@@ -61,7 +61,7 @@ public class display_list extends AppCompatActivity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 student student =  studentList.get(i);
                 showupdatedialog(student.getId(),student.getName(),student.getStop(),student.getFees());
-                return false;
+                return true;
             }
         });
     }
@@ -83,7 +83,7 @@ public class display_list extends AppCompatActivity {
         u_fees.setText(fee);
 
 
-        dialog.setTitle("Updating student" + id);
+        dialog.setTitle("Updating Student" + id);
         final AlertDialog alertDialog = dialog.create();
         alertDialog.show();
 
@@ -102,9 +102,9 @@ public class display_list extends AppCompatActivity {
 
     }
     public boolean updatestudent(String id,String name,String stop,String fee){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("student").child(id);
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("student").child(id);
         student student = new student(id,name,stop,fee);
-        databaseReference.setValue(student);
+        dbref.setValue(student);
         Toast.makeText(this, "Student Updated Successfully", Toast.LENGTH_SHORT).show();
         return true;
     }
