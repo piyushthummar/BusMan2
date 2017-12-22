@@ -60,13 +60,13 @@ public class display_list extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 student student =  studentList.get(i);
-                showupdatedialog(student.getId(),student.getName(),student.getStop(),student.getFees());
+                showupdatedialog(i,student.getId(),student.getName(),student.getStop(),student.getFees());
                 return true;
             }
         });
     }
 
-    private void showupdatedialog(final String id, String name, final String stop, final String fee){
+    private void showupdatedialog(int i,final String id, String name, final String stop, final String fee){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogview = inflater.inflate(R.layout.dialogbox,null);
@@ -77,11 +77,12 @@ public class display_list extends AppCompatActivity {
         final Spinner u_stop = (Spinner) dialogview.findViewById(R.id.u_stop);
         final EditText u_fees = (EditText) dialogview.findViewById(R.id.u_fees);
         final Button update = (Button) dialogview.findViewById(R.id.update);
-
+        List<student> students;
         u_name.setText(name);
         //u_stop.
         u_fees.setText(fee);
-
+        //student student = students.get(position);
+        u_stop.setSelection(i);
 
         dialog.setTitle("Updating Student" + id);
         final AlertDialog alertDialog = dialog.create();
@@ -102,7 +103,7 @@ public class display_list extends AppCompatActivity {
 
     }
     public boolean updatestudent(String id,String name,String stop,String fee){
-        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("student").child(id);
+        DatabaseReference dbref = FirebaseDatabase.getInstance().getReference("students").child(id);
         student student = new student(id,name,stop,fee);
         dbref.setValue(student);
         Toast.makeText(this, "Student Updated Successfully", Toast.LENGTH_SHORT).show();
