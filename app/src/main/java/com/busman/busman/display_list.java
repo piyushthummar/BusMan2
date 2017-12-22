@@ -61,15 +61,15 @@ public class display_list extends AppCompatActivity implements Serializable{
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 student student =  studentList.get(i);
-                Bundle b = new Bundle();
-                b.putSerializable("value", (Serializable) student);
-                showupdatedialog(b,student.getId(),student.getName(),student.getStop(),student.getFees());
+               /* Bundle b = new Bundle();
+                b.putSerializable("value", (Serializable) student);*/ //pass b as argument in showupdatedialog function
+                showupdatedialog(student.getId(),student.getName(),student.getStop(),student.getFees());
                 return true;
             }
         });
     }
 
-    private void showupdatedialog(Bundle b,final String id, String name, final String stop, final String fee){
+    private void showupdatedialog(final String id, String name, final String stop, final String fee){
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogview = inflater.inflate(R.layout.dialogbox,null);
